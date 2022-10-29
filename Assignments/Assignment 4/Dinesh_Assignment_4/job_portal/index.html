@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/fd9f59b0c7.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="css/all.css">
+    <title>Profile Page</title>
+    <style>
+        body{
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: rgb(251, 249, 246);
+        }
+        header{
+            padding: 20px 20px 20px 20px;
+            display: flex;
+        }
+        .links{
+            margin-left: 1000px;
+        }
+        a{
+            display: inline;
+        }
+        .backa{
+            color: gray;
+            padding: 2px;
+        }
+        .backb{
+            color: gray;
+            padding: 2px;
+        }
+        .backc{
+            color: gray;
+            padding: 2px;
+        }
+        .backd{
+            color: gray;
+            padding: 2px;
+        }
+        .heading{
+            color: rgb(48, 48, 48);
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .backa:hover{
+            color: #00acee;
+        }
+        .backb:hover{
+            color:rgb(66, 103, 178);
+        }
+        .backc:hover{
+            color:rgb(188, 42, 141);
+        }
+        .backd:hover{
+            color:black;
+        }
+        .container{
+            width: 75%;
+            margin: auto;
+        }
+        .mainbox{
+            box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+            border-radius: 5px;
+        }
+        .box1{
+            padding: 30px;
+            background-image: url('bgi1.png');
+            color: white;
+            height: 355px;
+            border-radius: 5px;
+        }
+        .box2{
+            margin: 8px;
+            padding: 48px 32px 48px 32px;
+            display: flex;
+        }
+        .box2a{
+            margin: 8px;
+            padding: 48px 32px 48px 32px;
+            display: flex;
+            height: 5px;
+        }
+        .cont2{
+            width: 40%;
+            margin: auto;
+        }
+        button{
+            border-radius: 30px;
+            width: 150px;
+            height: 66px;
+            border: 0px;
+            padding: 10px;
+            margin-right: 10px;
+        }
+        #btn1{
+            color: gray;
+            background-color:azure;
+            transition: .2s ease-in-out 0s;
+        }
+        #btn1:hover{
+            cursor: pointer;
+            transform: scale(1.05);
+            background: #FFF;
+            color: #000;
+        }
+        #btn2{
+            color: rgb(255, 255, 255);
+            background-color:rgb(0, 205, 154);
+            transition: .2s ease-in-out 0s;
+        }
+        #btn2:hover{
+            cursor: pointer;
+            transform: scale(1.05);
+            background: rgb(0, 212, 159);
+            color: rgb(255, 255, 255);
+        }
+        button p{
+            font-size:medium;
+            font-weight: 600;
+        }
+        #im1 {
+            -webkit-filter: grayscale(100%);
+            filter: grayscale(100%);
+            border: 5px solid white;
+        }
+        .about{
+            margin: 10px;
+        }
+        .pd{
+            margin: 10px;
+            width: 600px;
+        }
+        .box3{
+            margin: 8px;
+            padding: 48px 32px 48px 32px;
+            display: flex;
+        }
+        .plk{
+            margin: 50px;
+            width: 100px;
+        }
+        .wdlk{
+            margin: 10px;
+            width: 700px;
+        }
+        progress{
+            height: 30px;
+        }
+        progress::-webkit-progress-bar{
+            background-color: rgb(168, 168, 168);
+            border-radius: 3px;
+        }
+        progress::-webkit-progress-value{
+            background-color: aquamarine;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div>
+            <h3 class="heading">Kanyalakshmi G</h3>
+        </div>
+        <div class="links">
+            <a href="https://www.twitter.com"><i class="fa-brands fa-twitter backa"></i></a>
+            <a href="https://www.facebook.com"><i class="fa-brands fa-facebook backb"></i></a>
+            <a href="https://www.instagram.com"><i class="fa-brands fa-instagram backc"></i></a>
+            <a href="https://github.com/ramumaha"><i class="fa-brands fa-github backd"></i></a>
+        </div>
+    </header>
+    <section>
+        <div class="container">
+            <div class="mainbox">
+                <div class="box1">
+                    <div class="cont2">
+                        <h2>Kanyalakshmi G</h2>
+                        <p>IT Senior and Developer</p>
+                        <span>
+                            <button type="button" id="btn1">
+                                <p>Download CV</p>
+                            </button>
+                            <button type="button" id="btn2">
+                                <p>Hire Me</p>
+                            </button>
+                        </span>
+                    </div>
+
+                    <img height="200" width="200" src="kanyalakshmi_G.jpg" id="im1">
+                </div>
+                <div class="box2">
+                    <div class="about">
+                        <h2>About</h2>
+                        <p>Hello! I’m Kanya. I am passionate about UI/UX design and Web Design. I am a skilled Front-end Developer and master of Graphic Design tools such as Photoshop and Sketch.I love to turn my mind towards solving algorithmic puzzles.</p>
+                    </div>
+                    <div class="pd">
+                        <p>
+                            Age: 21
+                        </p>
+                        <p>
+                            Email: kanyalakshmig19057@it.ssn.edu.in
+                        </p>
+                        <p>
+                            Phone: 91+9876543210
+                        </p>
+                        <p>
+                            Address: 23,Lakshmipuram,Karur,Tamil Nadu.
+                        </p>
+                        <br>
+                    </div>
+                </div>
+                <br>
+                <div class="box2a">
+                    <h2>Professional Skills</h2>
+                </div>
+                <div class="box3">
+                    <div id="plk">
+                        <h4>Programming Languages Known</h4>
+                        <p>C++</p>
+                        <progress value="70" max="100" class="prog1">70%</progress>
+                        <p>C</p>
+                        <progress value="60" max="100" class="prog1">60%</progress>
+                        <p>Python</p>
+                        <progress value="50" max="100" class="prog1">50%</progress>
+                    </div>
+                    <div id="wdlk">
+                        <h4>Web Development Languages Known</h4>
+                        <p>HTML</p>
+                        <progress value="70" max="100" class="prog2">70%</progress>
+                        <p>CSS</p>
+                        <progress value="70" max="100" class="prog2">70%</progress>
+                        <p>JavaScript</p>
+                        <progress value="50" max="100" class="prog2">70%</progress>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
