@@ -16,12 +16,13 @@ class Credentials:
     def checkCredentials(self,email,password):
         cursor=self.conn.cursor()
         try:
-            cursor.execute("""SELECT * FROM auth where email=%s""",(email))
+            cursor.execute("""SELECT * FROM auth where email=%s""",(email,))
             res=cursor.fetchone()
             if res:
                 return res
             return None
         except:
+            #raise
             return None
     
     def __del__(self):
