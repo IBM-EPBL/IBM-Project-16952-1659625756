@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_restful import Api
-from Auth.Resource import AuthResource
+from Auth.resources.auth_resource import AuthResource
 from flask_cors import CORS
 
 app=Flask(__name__)
