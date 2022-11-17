@@ -40,7 +40,7 @@ class MobileView extends StatelessWidget {
             SizedBox(
               height: MediaQuery.of(context).size.height*0.05 ,
             ),
-            SubmitButton(),
+            const SubmitButton(),
             SizedBox(
               height: MediaQuery.of(context).size.height*0.05 ,
             ),

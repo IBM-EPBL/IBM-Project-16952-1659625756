@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:ledgerfe/global_utilities/responsive_widget.dart';
 
 class RouteManager {
-  static const String loginPage = '/login';
-  static const String timelinePage = '/';
+  static const String loginPage = '/';
+  static const String timelinePage = '/timeline';
 
   static Route<dynamic> generateRoute(RouteSettings settings){
     switch (settings.name){
