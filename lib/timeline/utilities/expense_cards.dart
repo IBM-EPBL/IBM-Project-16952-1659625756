@@ -31,34 +31,29 @@ class _ExpenseCardsState extends State<ExpenseCards> {
   };
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Expanded(
-          child: ListView.builder(
-              itemCount: expenses.length,
-              itemBuilder: (context, index) {
-                return Card(
-                  child: Row(
-                    children: <Widget>[
-                      ListTile(
-                        leading: Icon(
-                          _cardIcons["${expenses[index].tag}"],
-                        ),
-                        title: Text("${expenses[index].remarks}"),
-                        subtitle: Text("${expenses[index].tag}"),
-                      ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          FontAwesomeIcons.ellipsis,
-                        ),
-                      ),
-                    ],
+    return ListView.builder(
+        itemCount: expenses.length,
+        itemBuilder: (context, index) {
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Expanded(
+                child: ListTile(
+                  leading: Icon(
+                    _cardIcons[expenses[index].tag],
                   ),
-                );
-              }),
-        ),
-      ],
-    );
+                  title: Text("${expenses[index].remarks}"),
+                  subtitle: Text(expenses[index].tag),
+                ),
+              ),
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  FontAwesomeIcons.ellipsis,
+                ),
+              ),
+            ],
+          );
+        });
   }
 }
