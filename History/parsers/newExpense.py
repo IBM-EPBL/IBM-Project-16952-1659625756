@@ -15,3 +15,6 @@ addNewExpense.add_argument(
 addNewExpense.add_argument(
     "group_details",type=list,location="json"
 )
+addNewExpense.add_argument(
+    "remarks",type=str,location="json"
+)

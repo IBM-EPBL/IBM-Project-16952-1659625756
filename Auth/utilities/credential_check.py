@@ -1,7 +1,7 @@
 from Auth.db.auth import Credentials
 import bcrypt
 
-test=False
+test=True
 def CredentialCheck(email,password):
     creds=Credentials()
     result=creds.checkCredentials(email,password)
