@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:ledgerfe/global_utilities/responsive_widget.dart';
 
 class RouteManager {
-  static const String loginPage = '/timeline';
+  static const String loginPage = '/login';
   static const String timelinePage = '/';
 
   static Route<dynamic> generateRoute(RouteSettings settings){

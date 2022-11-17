@@ -12,16 +12,17 @@ class ExpensePieChart extends StatefulWidget {
 class _ExpensePieChartState extends State<ExpensePieChart> {
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Column(
-        children: <Widget>[
-          PieChart(
-            PieChartData(
-              sections: getSections(),
-            )
-          )
-        ],
-      )
+    return Expanded(
+      child: Card(
+        child:PieChart(
+          PieChartData(
+            borderData: FlBorderData(show: false),
+            sectionsSpace: 5,
+            centerSpaceRadius: 50,
+            sections: getSections(),
+          ),
+        ),
+      ),
     );
   }
 }
