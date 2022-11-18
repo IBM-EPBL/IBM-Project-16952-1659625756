@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:ledgerfe/timeline/utilities/pie_data.dart';
+import 'package:ledgerfe/timeline/services/pie_data.dart';
 
 class IndicatorsWidget extends StatelessWidget {
-  const IndicatorsWidget({Key? key}) : super(key: key);
+  final PieData fetchedData;
+  const IndicatorsWidget({Key? key, required this.fetchedData}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: PieData.data
+      children: fetchedData.data
       .map(
           (data) => Container(
             padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.width*0.005),

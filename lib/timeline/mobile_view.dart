@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ledgerfe/timeline/services/expense_data.dart';
+import 'package:ledgerfe/timeline/services/history_http_call.dart';
 import 'package:ledgerfe/timeline/utilities/expense_cards.dart';
 import 'package:ledgerfe/timeline/utilities/representation.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
@@ -15,9 +16,25 @@ class MobileView extends StatefulWidget {
 
 class _MobileViewState extends State<MobileView> {
   PageController controller = PageController(viewportFraction: 1.0);
+  late Future<Map<String,dynamic>> params;
+  Future<Map<String,dynamic>> getParams(int x,int y)
+  {
+    var service=GetHistory(from: x, to: y);
+    return service.history();
+  }
+  @override
+  void initState()
+  {
+    params=getParams((from.toUtc().millisecondsSinceEpoch/1e3).round(), (to.toUtc().millisecondsSinceEpoch/1e3).round());
+    super.initState();
+  }
   List<ExpenseData> val=<ExpenseData>[ExpenseData(tag: "education",time: "Monday",remarks: "summa",amount: 25.0),ExpenseData(tag: "education",time: "Monday",remarks: "summa",amount: 25.0)];
-  DateTime from = DateTime.now();
   DateTime to = DateTime.now();
+  DateTime from = DateTime.now().subtract(const Duration(days: 30));
+  void updateParams(DateTime from, DateTime to)
+  {
+    setState(() {params=getParams((from.toUtc().millisecondsSinceEpoch/1e3).round(), (to.toUtc().millisecondsSinceEpoch/1e3).round());});
+  }
   StatefulBuilder filter(){
     return StatefulBuilder(
       builder: (context,setState){return AlertDialog(
@@ -38,7 +55,7 @@ class _MobileViewState extends State<MobileView> {
                       }, currentTime: DateTime.now(), locale: LocaleType.en);
                   },
                   child: Text(
-                    "${from.year}/${from.month}/${from.day}"
+                      "${from.year}/${from.month}/${from.day} ${from.hour}:${from.minute}:${from.second}"
                   ),
               ),
               ElevatedButton(
@@ -55,7 +72,7 @@ class _MobileViewState extends State<MobileView> {
                         }, currentTime: DateTime.now(), locale: LocaleType.en);
                   },
                   child: Text(
-                    "${to.year}/${to.month}/${to.day}"
+                    "${to.year}/${to.month}/${to.day} ${to.hour}:${to.minute}:${to.second}"
                   ),
               )
             ],
@@ -67,7 +84,8 @@ class _MobileViewState extends State<MobileView> {
             ),
             TextButton(
               onPressed: () {
-               Navigator.pop(context, 'OK');
+                Navigator.pop(context, 'OK');
+                updateParams(from, to);
               },
               child: const Text('Submit'),
             ),
@@ -102,20 +120,39 @@ class _MobileViewState extends State<MobileView> {
           ),
         ],
       ),
-      body: RawScrollbar(
-        thickness: 10,
-        radius: const Radius.circular(12),
-        timeToFade: const Duration(seconds: 1),
-        controller: controller,
-        child: PageView(
-          pageSnapping: false,
-          scrollDirection: Axis.vertical,
-          controller: controller,
-          children: [
-            const Representation(),
-            ExpenseCards(expenses: val),
-          ],
-        ),
+      body: FutureBuilder<Map<String,dynamic>?>(
+        future: params,
+        builder: (context,snapshot){
+          if(snapshot.hasError)
+            {
+              return Container();
+            }
+          else if(snapshot.connectionState==ConnectionState.waiting)
+            {
+              return const Center(child: CircularProgressIndicator());
+            }
+          else if(snapshot.hasData){
+            var data=snapshot.data!;
+            print(data);
+            return RawScrollbar(
+              thickness: 10,
+              radius: const Radius.circular(12),
+              timeToFade: const Duration(seconds: 1),
+              controller: controller,
+              child: PageView(
+                pageSnapping: false,
+                scrollDirection: Axis.vertical,
+                controller: controller,
+                children: [
+                  Representation(fetchedData: data["pieData"], total: data["total"],),
+                  ExpenseCards(expenses: data["expenseData"]),
+                ],
+              ),
+            );
+          }
+          else{print("hi");}
+          return Container();
+        },
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
