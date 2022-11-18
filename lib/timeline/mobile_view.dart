@@ -156,7 +156,31 @@ class _MobileViewState extends State<MobileView> {
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
-        onPressed: () {},
+        onPressed: ()=>showDialog<String>(
+          context: context,
+          builder: (BuildContext context) => AlertDialog(
+            title: const Text('Enter Expense Details'),
+            content: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const TextField(),
+                const TextField(),
+                const TextField(),
+                const TextField(),
+              ],
+            ),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () => Navigator.pop(context, 'Cancel'),
+                child: const Text('Cancel'),
+              ),
+              TextButton(
+                onPressed: () => Navigator.pop(context, 'OK'),
+                child: const Text('OK'),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
