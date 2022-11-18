@@ -2,13 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../services/expense_data.dart';
 
-List<ExpenseData> expenses = [
-  ExpenseData(tag: "food", remarks: "Dinner", amount: 50, time: "2022-12-17 13:33:0"),
-  ExpenseData(tag: "education", remarks: "College Fees", amount: 150, time: "2022-12-16 13:33:0"),
-];
-
 class ExpenseCards extends StatefulWidget {
-  const ExpenseCards({Key? key}) : super(key: key);
+  final List<ExpenseData> expenses;
+  const ExpenseCards({Key? key, required this.expenses}) : super(key: key);
 
   @override
   State<ExpenseCards> createState() => _ExpenseCardsState();
@@ -31,29 +27,32 @@ class _ExpenseCardsState extends State<ExpenseCards> {
   };
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        itemCount: expenses.length,
-        itemBuilder: (context, index) {
-          return Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Expanded(
-                child: ListTile(
-                  leading: Icon(
-                    _cardIcons[expenses[index].tag],
+    return Padding(
+      padding: EdgeInsets.all(MediaQuery.of(context).size.width*0.1),
+      child: ListView.builder(
+          itemCount: widget.expenses.length,
+          itemBuilder: (context, index) {
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Expanded(
+                  child: ListTile(
+                    leading: Icon(
+                      _cardIcons[widget.expenses[index].tag],
+                    ),
+                    title: Text(widget.expenses[index].tag),
+                    subtitle: Text("${widget.expenses[index].remarks} - ₹${widget.expenses[index].amount} - ${widget.expenses[index].time}"),
                   ),
-                  title: Text("${expenses[index].tag}"),
-                  subtitle: Text("${expenses[index].remarks} - ₹${expenses[index].amount}"),
                 ),
-              ),
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  FontAwesomeIcons.ellipsis,
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    FontAwesomeIcons.ellipsis,
+                  ),
                 ),
-              ),
-            ],
-          );
-        });
+              ],
+            );
+          }),
+    );
   }
 }

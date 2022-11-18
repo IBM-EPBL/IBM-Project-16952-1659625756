@@ -13,14 +13,12 @@ class _ExpensePieChartState extends State<ExpensePieChart> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Card(
-        child:PieChart(
-          PieChartData(
-            borderData: FlBorderData(show: false),
-            sectionsSpace: 5,
-            centerSpaceRadius: 50,
-            sections: getSections(),
-          ),
+      child: PieChart(
+        PieChartData(
+          borderData: FlBorderData(show: false),
+          sectionsSpace: 0,
+          centerSpaceRadius: MediaQuery.of(context).size.width*0.25,
+          sections: getSections(),
         ),
       ),
     );

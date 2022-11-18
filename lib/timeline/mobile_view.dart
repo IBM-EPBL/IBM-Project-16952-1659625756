@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:ledgerfe/timeline/services/expense_data.dart';
 import 'package:ledgerfe/timeline/utilities/expense_cards.dart';
 import 'package:ledgerfe/timeline/utilities/representation.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+
 
 class MobileView extends StatefulWidget {
   const MobileView({Key? key}) : super(key: key);
@@ -15,61 +15,64 @@ class MobileView extends StatefulWidget {
 
 class _MobileViewState extends State<MobileView> {
   PageController controller = PageController(viewportFraction: 1.0);
-  List<Widget> _widgetList=[
-    Representation(),
-    ExpenseCards(),
-  ];
+  List<ExpenseData> val=<ExpenseData>[ExpenseData(tag: "education",time: "Monday",remarks: "summa",amount: 25.0),ExpenseData(tag: "education",time: "Monday",remarks: "summa",amount: 25.0)];
   DateTime from = DateTime.now();
   DateTime to = DateTime.now();
-  AlertDialog filter(){
-    return AlertDialog(
-      title: const Text("Filter by date"),
-        content: Column(
-          children: <Widget>[
-            ElevatedButton(
-                onPressed: (){
-                  DatePicker.showDateTimePicker(
-                    context,
-                    showTitleActions: true,
-                    minTime: DateTime(1970,1,1),
-                    maxTime: DateTime(2080,1,1),
-                    onChanged: (date){
-                      from = date;
-                    }, currentTime: DateTime.now(), locale: LocaleType.en);
-                },
-                child: Text(
-                  "${from.year}/${from.month}/${from.day}"
-                ),
-            ),
-            ElevatedButton(
-                onPressed: (){
-                  DatePicker.showDateTimePicker(
+  StatefulBuilder filter(){
+    return StatefulBuilder(
+      builder: (context,setState){return AlertDialog(
+        title: const Text("Filter by date"),
+          content: Column(
+            children: <Widget>[
+              ElevatedButton(
+                  onPressed: (){
+                    DatePicker.showDateTimePicker(
                       context,
                       showTitleActions: true,
                       minTime: DateTime(1970,1,1),
                       maxTime: DateTime(2080,1,1),
                       onConfirm: (date){
-                        to = date;
+                        setState(() {
+                          from = date;
+                        });
                       }, currentTime: DateTime.now(), locale: LocaleType.en);
-                },
-                child: Text(
-                  "${to.year}/${to.month}/${to.day}"
-                ),
-            )
+                  },
+                  child: Text(
+                    "${from.year}/${from.month}/${from.day}"
+                  ),
+              ),
+              ElevatedButton(
+                  onPressed: (){
+                    DatePicker.showDateTimePicker(
+                        context,
+                        showTitleActions: true,
+                        minTime: DateTime(1970,1,1),
+                        maxTime: DateTime(2080,1,1),
+                        onConfirm: (date){
+                          setState(() {
+                            to = date;
+                          });
+                        }, currentTime: DateTime.now(), locale: LocaleType.en);
+                  },
+                  child: Text(
+                    "${to.year}/${to.month}/${to.day}"
+                  ),
+              )
+            ],
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.pop(context, 'Cancel'),
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () {
+               Navigator.pop(context, 'OK');
+              },
+              child: const Text('Submit'),
+            ),
           ],
-        ),
-        actions: <Widget>[
-          TextButton(
-            onPressed: () => Navigator.pop(context, 'Cancel'),
-            child: const Text('Cancel'),
-          ),
-          TextButton(
-            onPressed: () {
-             Navigator.pop(context, 'OK');
-            },
-            child: const Text('Submit'),
-          ),
-        ],
+      );}
     );
   }
   @override
@@ -82,14 +85,14 @@ class _MobileViewState extends State<MobileView> {
                   context: context,
                   builder: (BuildContext context) => filter()
               ),
-              icon: Icon(
+              icon: const Icon(
                 FontAwesomeIcons.filter,
                 color: Color(0xFF3e688c),
               )
           ),
           InkWell(
             onTap: () {},
-            child: Padding(
+            child: const Padding(
               padding: EdgeInsets.fromLTRB(0, 0, 12, 0),
               child: Icon(
                 FontAwesomeIcons.user,
@@ -101,18 +104,21 @@ class _MobileViewState extends State<MobileView> {
       ),
       body: RawScrollbar(
         thickness: 10,
-        radius: Radius.circular(12),
-        timeToFade: Duration(seconds: 1),
+        radius: const Radius.circular(12),
+        timeToFade: const Duration(seconds: 1),
         controller: controller,
         child: PageView(
           pageSnapping: false,
           scrollDirection: Axis.vertical,
           controller: controller,
-          children: _widgetList,
+          children: [
+            const Representation(),
+            ExpenseCards(expenses: val),
+          ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
         onPressed: () {},
       ),
     );

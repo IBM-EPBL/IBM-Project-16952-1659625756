@@ -12,10 +12,10 @@ class Representation extends StatefulWidget {
 }
 
 class _RepresentationState extends State<Representation> {
-  List<Widget> _rep=[
-    ExpensePieChart(),
-    Indication(),
-    TotalExpense(),
+  final List<Widget> _rep=[
+    const ExpensePieChart(),
+    const Indication(),
+    const TotalExpense(),
   ];
   @override
   Widget build(BuildContext context) {

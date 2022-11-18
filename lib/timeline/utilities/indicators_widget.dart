@@ -11,7 +11,7 @@ class IndicatorsWidget extends StatelessWidget {
       children: PieData.data
       .map(
           (data) => Container(
-            padding: EdgeInsets.symmetric(vertical: 2.0),
+            padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.width*0.005),
             child: buildIndicator(color: data.color, text: data.tag),
           )
       ).toList(),

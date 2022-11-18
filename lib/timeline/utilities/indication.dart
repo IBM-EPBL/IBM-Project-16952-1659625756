@@ -15,8 +15,8 @@ class _IndicationState extends State<Indication> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Padding(
-          padding: EdgeInsets.all(16),
-          child: IndicatorsWidget(),
+          padding: EdgeInsets.all(MediaQuery.of(context).size.width*0.05),
+          child: const IndicatorsWidget(),
         ),
       ],
     );
